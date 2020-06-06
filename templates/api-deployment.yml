@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patio-api
+  labels:
+    app: patio
+    tier: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patio
+      tier: api
+  template:
+    metadata:
+      name: patio-api
+      labels:
+        app: patio
+        tier: api
+    spec:
+      containers:
+        - image: kaleidosteam/patio-api:{{ .Values.api.deployment.version }}
+          name: patio-api
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1G"
+              cpu: "0.5"
+          env:
+            - name: MICRONAUT_ENVIRONMENTS
+              value: prod
+            - name: DWBH_LOCALE
+              value: {{ .Values.api.deployment.locale }}
+            - name: DWBH_JDBC_URL
+              value: {{ .Values.api.deployment.database.url }}
+            - name: DWBH_JDBC_USER
+              value: {{ .Values.api.deployment.database.username }}
+            - name: DWBH_JDBC_PASSWORD
+              value: {{ .Values.api.deployment.database.password }}
+            - name: DWBH_JDBC_DRIVER
+              value: {{ .Values.api.deployment.database.driver }}
+            - name: DWBH_AWS_EMAIL_ENABLED
+              value: "{{ .Values.api.deployment.email.source }}"
+            - name: DWBH_AWS_EMAIL_SOURCE
+              value: {{ .Values.api.deployment.email.source }}
+            - name: DWBH_AWS_ACCESS_KEY
+              value: {{ .Values.api.deployment.security.aws.access_key }}
+            - name: DWBH_AWS_SECRET_KEY
+              value: {{ .Values.api.deployment.security.aws.secret_key }}
+            - name: DWBH_AWS_EMAIL_REGION
+              value: {{ .Values.api.deployment.security.aws.email_region }}
+            - name: DWBH_OAUTH2_KEY
+              value: {{ .Values.api.deployment.security.oauth2.key }}
+            - name: DWBH_OAUTH2_SECRET
+              value: {{ .Values.api.deployment.security.oauth2.secret }}
+            - name: DWBH_OAUTH2_CALLBACK
+              value: {{ .Values.api.deployment.security.oauth2.callback }}
+            - name: DWBH_JWT_SECRET
+              value: {{ .Values.api.deployment.security.jwt.secret }}
+            - name: DWBH_JWT_DAYS
+              value: "{{ .Values.api.deployment.security.jwt.days }}"
+            - name: DWBH_JWT_ALGO
+              value: {{ .Values.api.deployment.security.jwt.algorithm }}
+            - name: DWBH_JWT_ISSUER
+              value: {{ .Values.api.deployment.security.jwt.issuer }}
+            - name: DWBH_DUSER_ENABLED
+              value: "{{ .Values.api.deployment.security.duser.enabled }}"
+            - name: DWBH_DUSER_NAME
+              value: {{ .Values.api.deployment.security.duser.name }}
+            - name: DWBH_DUSER_EMAIL
+              value: {{ .Values.api.deployment.security.duser.email }}
+            - name: DWBH_DUSER_PASSWORD
+              value: {{ .Values.api.deployment.security.duser.password }}
+            - name: DWBH_HOST
+              value: {{ .Values.api.deployment.host }}
