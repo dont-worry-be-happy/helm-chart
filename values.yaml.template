@@ -1,0 +1,53 @@
+# Default values for patio.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+db:
+  deployment:
+    name: patio
+    username: patio
+    password: patio
+    port: 5432
+  service:
+    port: 5432
+
+api:
+  service:  
+    port: 8080  
+  deployment:
+    version: latest
+    locale: en
+    host: "https://patio.maydomain.com"
+    database:
+      url: "jdbc:postgresql://db:5432/patio"
+      username: patio
+      password: patio
+      driver: org.postgresql.Driver
+    email:
+      enabled: false
+      source: hello@mydomain.com
+    security:
+      aws:
+        access_key: unknown
+        secret_key: unknown
+        email_region: unknown
+      jwt:
+        secret: mysupersecret
+        days: 7
+        algorithm: HS256
+        issuer: "https://mydomain.com/issuer"
+      oauth2:
+        key: unknown
+        secret: unknown
+        callback: unknown
+      duser:
+        enabled: true
+        name: admin
+        password: admin
+        email: admin@email.com
+
+front:
+  deployment:
+    version: latest
+  service:
+    port: 80
