@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: patio-config
+  labels:
+    app: patio
+data:
+    MICRONAUT_ENVIRONMENTS: prod
+    DWBH_LOCALE: {{ .Values.api.deployment.locale }}
+    DWBH_JDBC_URL: {{ .Values.api.deployment.database.url }}
+    DWBH_JDBC_USER: {{ .Values.api.deployment.database.username }}
+    DWBH_JDBC_PASSWORD: {{ .Values.api.deployment.database.password }}
+    DWBH_JDBC_DRIVER: {{ .Values.api.deployment.database.driver }}
+    DWBH_AWS_EMAIL_ENABLED: "{{ .Values.api.deployment.email.source }}"
+    DWBH_AWS_EMAIL_SOURCE: {{ .Values.api.deployment.email.source }}
+    DWBH_AWS_ACCESS_KEY: {{ .Values.api.deployment.security.aws.access_key }}
+    DWBH_AWS_SECRET_KEY: {{ .Values.api.deployment.security.aws.secret_key }}
+    DWBH_AWS_EMAIL_REGION: {{ .Values.api.deployment.security.aws.email_region }}
+    DWBH_OAUTH2_KEY: {{ .Values.api.deployment.security.oauth2.key }}
+    DWBH_OAUTH2_SECRET: {{ .Values.api.deployment.security.oauth2.secret }}
+    DWBH_OAUTH2_CALLBACK: {{ .Values.api.deployment.security.oauth2.callback }}
+    DWBH_JWT_SECRET: {{ .Values.api.deployment.security.jwt.secret }}
+    DWBH_JWT_DAYS: "{{ .Values.api.deployment.security.jwt.days }}"
+    DWBH_JWT_ALGO: {{ .Values.api.deployment.security.jwt.algorithm }}
+    DWBH_JWT_ISSUER: {{ .Values.api.deployment.security.jwt.issuer }}
+    DWBH_DUSER_ENABLED: "{{ .Values.api.deployment.security.duser.enabled }}"
+    DWBH_DUSER_NAME: {{ .Values.api.deployment.security.duser.name }}
+    DWBH_DUSER_EMAIL: {{ .Values.api.deployment.security.duser.email }}
+    DWBH_DUSER_PASSWORD: {{ .Values.api.deployment.security.duser.password }}
+    DWBH_HOST: {{ .Values.api.deployment.host }}

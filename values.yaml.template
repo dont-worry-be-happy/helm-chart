@@ -3,7 +3,9 @@
 # Declare variables to be passed into your templates.
 
 db:
-  deployment:
+  deployment:    
+    disk_mount: /var/data
+    pg_data: /var/data/patio    
     name: patio
     username: patio
     password: patio
@@ -15,6 +17,9 @@ api:
   service:  
     port: 8080  
   deployment:
+    resources:
+      memory: 250M
+      cpu: "0.5"
     version: latest
     locale: en
     host: "https://patio.maydomain.com"
