@@ -11,7 +11,7 @@ data:
     DWBH_JDBC_USER: {{ .Values.api.deployment.database.username }}
     DWBH_JDBC_PASSWORD: {{ .Values.api.deployment.database.password }}
     DWBH_JDBC_DRIVER: {{ .Values.api.deployment.database.driver }}
-    DWBH_AWS_EMAIL_ENABLED: "{{ .Values.api.deployment.email.source }}"
+    DWBH_AWS_EMAIL_ENABLED: "{{ .Values.api.deployment.email.enabled }}"
     DWBH_AWS_EMAIL_SOURCE: {{ .Values.api.deployment.email.source }}
     DWBH_AWS_ACCESS_KEY: {{ .Values.api.deployment.security.aws.access_key }}
     DWBH_AWS_SECRET_KEY: {{ .Values.api.deployment.security.aws.secret_key }}
