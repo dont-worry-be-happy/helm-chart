@@ -4,32 +4,27 @@ metadata:
   name: patio-db
   labels:
     app: patio
+    tier: db
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: patio
-      tier: postgres
+      tier: db
   template:
     metadata:
       name: patio-db
       labels:
         app: patio
-        tier: postgres
+        tier: db
     spec:
       containers:
-        - image: postgres:10-alpine
-          name: postgres
+        - name: patio-db
+          image: postgres:10-alpine
+          imagePullPolicy: Always
           envFrom:
             - configMapRef:
                 name: patio-db-config            
           ports:
             - containerPort: {{ .Values.db.deployment.port }}
               name: patio-db
-          volumeMounts:
-            - mountPath: {{ .Values.db.deployment.disk_mount }}
-              name: db-data
-      volumes:
-        - name: db-data
-          persistentVolumeClaim:
-            claimName: patio-db-pv-claim

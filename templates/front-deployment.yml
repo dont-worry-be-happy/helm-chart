@@ -19,6 +19,6 @@ spec:
         tier: front
     spec:
       containers:
-        - image: kaleidosteam/patio-front:{{ .Values.front.deployment.version }}
+        - name: patio-front
+          image: kaleidosteam/patio-front:{{ .Values.front.deployment.version }}
           imagePullPolicy: Always
-          name: patio-front

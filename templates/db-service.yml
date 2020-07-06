@@ -4,11 +4,13 @@ metadata:
   name: patio-db
   labels:
     app: patio
-
+    tier: db
 spec:
   ports:
     - port: {{ .Values.db.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.db.service.port }}
   selector:
     app: patio
-    tier: postgres
+    tier: db
   clusterIP: None
